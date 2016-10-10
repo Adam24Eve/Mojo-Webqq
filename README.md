@@ -1,4 +1,4 @@
-Mojo-Webqq v1.8.4 [![Build Status](https://travis-ci.org/sjdy521/Mojo-Webqq.svg?branch=master)](https://travis-ci.org/sjdy521/Mojo-Webqq) [![Join the chat at https://gitter.im/sjdy521/Mojo-Webqq](https://badges.gitter.im/sjdy521/Mojo-Webqq.svg)](https://gitter.im/sjdy521/Mojo-Webqq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Mojo-Webqq v1.8.6 [![Build Status](https://travis-ci.org/sjdy521/Mojo-Webqq.svg?branch=master)](https://travis-ci.org/sjdy521/Mojo-Webqq) [![Join the chat at https://gitter.im/sjdy521/Mojo-Webqq](https://badges.gitter.im/sjdy521/Mojo-Webqq.svg)](https://gitter.im/sjdy521/Mojo-Webqq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ========================
 
 使用Perl语言编写的Smartqq客户端框架，基于Mojolicious，要求Perl版本5.10+，可通过插件提供基于HTTP协议的api接口供其他语言或系统调用
@@ -39,6 +39,7 @@ Mojo-Webqq v1.8.4 [![Build Status](https://travis-ci.org/sjdy521/Mojo-Webqq.svg?
 |[Qiandao](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::Qiandao)          |1        |已发布      |sjdy521       |QQ群每日签到
 |[PostImgVerifycode](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::PostImgVerifycode)   |0        |已发布      |sjdy521       |登录验证码发送到邮箱实现远程登录
 |[PostQRcode](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::PostQRcode)          |0        |已发布      |sjdy521       |登录二维码发送到邮箱实现远程扫码
+|[UploadQRcode](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::UploadQRcode)          |0        |已发布      |sjdy521       |二维码上传腾讯云存储获得公网访问url
 |[ShowQRcode](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::ShowQRcode)          |0        |已发布      |autodataming  |调用系统图片查看程序来示二维码（目前仅支持win）
 |[SmartReply](https://metacpan.org/pod/distribution/Mojo-Webqq/doc/Webqq.pod#Mojo::Webqq::Plugin::SmartReply)          |0        |已发布      |sjdy521       |智能聊天回复
 
@@ -115,14 +116,20 @@ Mojo-Webqq v1.8.4 [![Build Status](https://travis-ci.org/sjdy521/Mojo-Webqq.svg?
 
   |平台   |推荐选择|下载地址
   |-------|--------|-------------|
-  |Windows|1. **StrawberryPerl**<br>2. ActivePerl<br>|[StrawberryPerl下载地址](http://strawberryperl.com/)<br>[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)|
-  |Linux  |1. **ActivePerl**<br>2. 官方源码<br>3. yum/apt等包管理器<br>4. Mojo-ActivePerl|[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)<br>[Mojo-ActivePerl下载地址](https://github.com/sjdy521/Mojo-ActivePerl)|
-  |Mac    |1. **ActivePerl**|[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)
+  |Windows|1. **StrawberryPerl**<br>2. ActivePerl<br>3. **Mojo-StrawberryPerl**|[StrawberryPerl下载地址](http://strawberryperl.com/)<br>[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)<br>[Mojo-StrawberryPerl下载地址](https://github.com/sjdy521/Mojo-StrawberryPerl)|
+  |Linux  |1. **系统自带**<br>2. **yum/apt等包管理器**<br>3. **官方源码**<br>4. ActivePerl<br>5. Mojo-ActivePerl|[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)<br>[Mojo-ActivePerl下载地址](https://github.com/sjdy521/Mojo-ActivePerl)|
+  |Mac    |1. **系统自带**<br>2. ActivePerl|[ActivePerl下载地址](http://www.activestate.com/activeperl/downloads)
   
-    注意：[Mojo-ActivePerl](https://github.com/sjdy521/Mojo-ActivePerl)是我基于ActivePerl打包的而成
+    注意：
+    
+    [Mojo-ActivePerl](https://github.com/sjdy521/Mojo-ActivePerl)是我基于ActivePerl打包的而成
   
     已经包含perl-5.22+cpanm+Mojo-Webqq+Mojo-Weixin的完整运行环境，适用于linux x86_64系统，并且系统glibc 2.15+
-
+    
+    [Mojo-StrawberryPerl](https://github.com/sjdy521/Mojo-StrawberryPerl)是网友 **@那谁** 基于StrawberryPerl精简打包而成
+    
+    已经包含perl-5.24+cpanm+Mojo-Webqq+Mojo-Weixin的完整运行环境，适用于windows 32位/64位系统
+    
 2. *安装cpanm包管理工具*（如果系统已经安装了cpanm可以忽略此步骤）
 
     方法a： 通过cpan安装cpanm
@@ -252,12 +259,21 @@ Mojo-Webqq v1.8.4 [![Build Status](https://travis-ci.org/sjdy521/Mojo-Webqq.svg?
 
 *JavaScript*
 * [webqqircd](https://github.com/MaskRay/webqqircd) 用IRC客户端控制WebQQ(SmartQQ)，类似于wechatircd
+* [qqbot](https://github.com/floatinghotpot/qqbot) SmartQQ Robot and API Server, powered by node.js
+* [qqbot](https://github.com/ScienJus/qqbot) 基于SmartQQ（WebQQ）的QQ机器人 / a qq robot based on smartqq(webqq) api
 
 *Python*
 * [SmartQQBot](https://github.com/Yinzo/SmartQQBot) 基于SmartQQ的自动机器人框架
+* [qqbot](https://github.com/pandolia/qqbot) A conversation robot base on Tencent's SmartQQ
 
 *Java*
 * [smartqq](https://github.com/ScienJus/smartqq) SmartQQ（WebQQ）的Api ，你可以用它实现自己的QQ 机器人
+
+###捐赠奖励
+
+可以通过扫描支付宝付款二维码进行捐助，感谢您的支持和鼓励
+
+![donate](screenshot/donate.jpg)
 
 ###COPYRIGHT 和 LICENCE
 
